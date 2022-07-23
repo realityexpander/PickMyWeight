@@ -24,6 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             var weight by remember { mutableStateOf(80) }
 
+
             PickMyWeightTheme {
                 Box(
                     modifier = Modifier
@@ -31,9 +32,6 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     ClockWidget(
-                        hour = 6,
-                        minute = 34,
-                        second = 22,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(300.dp)

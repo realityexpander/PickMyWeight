@@ -2,6 +2,8 @@ package com.realityexpander.pickmyweight
 
 import android.graphics.Color
 import android.graphics.Paint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -9,19 +11,33 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import java.time.LocalTime
+import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ClockWidget(
     modifier: Modifier = Modifier,
     style: ClockStyle = ClockStyle(),
-    hour: Int,
-    minute: Int,
-    second: Int
 ) {
     val radius = style.radius
     var center by remember { mutableStateOf(Offset.Zero) } // center of the canvas
+    var hour by remember { mutableStateOf(LocalTime.now().hour) }
+    var minute by remember { mutableStateOf(LocalTime.now().minute) }
+    var second by remember { mutableStateOf(LocalTime.now().second) }
+    var update by remember { mutableStateOf(0) }
+
+    LaunchedEffect(update) {
+        delay(900L)
+
+        hour = LocalTime.now().hour
+        minute = LocalTime.now().minute
+        second = LocalTime.now().second
+        update++
+    }
 
     Canvas(
         modifier = modifier

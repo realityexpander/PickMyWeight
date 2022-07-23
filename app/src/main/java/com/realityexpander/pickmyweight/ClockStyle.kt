@@ -15,7 +15,7 @@ data class ClockStyle(
 
     val hourHandLength: Dp = 75.dp,
     val minuteHandLength: Dp = 95.dp,
-    val secondHandLength: Dp = 115.dp,
+    val secondHandLength: Dp = 112.dp,
 
     val hourHandWidth: Dp = 8.dp,
     val minuteHandWidth: Dp = 4.dp,
