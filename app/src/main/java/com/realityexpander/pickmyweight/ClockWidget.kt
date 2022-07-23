@@ -115,7 +115,7 @@ fun ClockWidget(
         )
 
         // draw the minute hand
-        val minuteAngle = (minute * 6) - 90f
+        val minuteAngle = (minute * 6) + (second * 0.1f) - 90f
         val minuteAngleInRadians = minuteAngle * (Math.PI / 180f).toFloat()
         val minuteX = center.x + (style.minuteHandLength.toPx() * cos(minuteAngleInRadians))
         val minuteY = center.y + (style.minuteHandLength.toPx() * sin(minuteAngleInRadians))
