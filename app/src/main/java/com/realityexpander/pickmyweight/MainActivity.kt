@@ -29,6 +29,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxSize()
                 ) {
+
+                    ClockWidget(
+                        hour = 6,
+                        minute = 34,
+                        second = 22,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp)
+                            .align(Alignment.TopCenter)
+                    )
+
                     ScaleWidget(
                         style = ScaleStyle(
                             scaleWidth = 150.dp
