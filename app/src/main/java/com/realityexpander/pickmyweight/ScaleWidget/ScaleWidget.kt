@@ -1,4 +1,4 @@
-package com.realityexpander.pickmyweight
+package com.realityexpander.pickmyweight.ScaleWidget
 
 import android.graphics.Color
 import android.graphics.Color.argb

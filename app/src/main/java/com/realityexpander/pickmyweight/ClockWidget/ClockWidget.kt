@@ -1,4 +1,4 @@
-package com.realityexpander.pickmyweight
+package com.realityexpander.pickmyweight.ClockWidget
 
 import android.graphics.Color
 import android.graphics.Paint
@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import java.time.LocalTime
-import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 

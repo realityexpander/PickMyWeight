@@ -1,4 +1,4 @@
-package com.realityexpander.pickmyweight
+package com.realityexpander.pickmyweight.ClockWidget
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp

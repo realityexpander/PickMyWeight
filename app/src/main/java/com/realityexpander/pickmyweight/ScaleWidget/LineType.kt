@@ -1,4 +1,4 @@
-package com.realityexpander.pickmyweight
+package com.realityexpander.pickmyweight.ScaleWidget
 
 sealed class LineType {
     object Normal: LineType()
