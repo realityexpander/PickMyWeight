@@ -35,11 +35,9 @@ fun ClockWidget(
             drawCircle(
                 center.x,
                 center.y,
-                radius.toPx() / 2f,
+                radius.toPx(),
                 Paint().apply {
-                    strokeWidth = radius.toPx()
                     color = Color.WHITE
-                    setStyle(Paint.Style.STROKE)
                     setShadowLayer(
                         50f,
                         0f,
