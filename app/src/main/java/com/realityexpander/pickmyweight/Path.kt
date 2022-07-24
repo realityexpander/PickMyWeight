@@ -12,8 +12,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.drawscope.*
+import androidx.compose.ui.graphics.scale
 import androidx.compose.ui.unit.dp
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -175,6 +175,90 @@ fun PathAnimateArrowhead(
                 },
                 color = Color.Red
             )
+        }
+    }
+}
+
+@Composable
+fun AnimateTransform(
+    modifier: Modifier = Modifier,
+) {
+    val animVal = remember {
+        Animatable(initialValue = 0f)
+    }
+    LaunchedEffect(key1 = true) {
+        animVal.animateTo(
+            targetValue = 3f,
+            animationSpec = tween(
+                durationMillis = 3500
+            )
+        )
+    }
+
+
+    // Rotate
+    if (false) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            rotate(360f * animVal.value, pivot = Offset(200f, 200f)) {
+                drawRect(
+                    color = Color.Red,
+                    topLeft = Offset(100f, 100f),
+                    size = Size(300f, 200f)
+                )
+            }
+        }
+    }
+
+    // Translate
+    if (false) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            translate(left = 200 * animVal.value, top = animVal.value * 200f) {
+                drawRect(
+                    color = Color.Red,
+                    topLeft = Offset(100f, 100f),
+                    size = Size(300f, 200f)
+                )
+            }
+        }
+    }
+
+    // Translate & rotate
+    if (false) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            translate(left = 200 * animVal.value, top = animVal.value * 200f) {
+                rotate(360f * animVal.value, pivot = Offset(200f, 200f)) {
+                    scale(4f * animVal.value, pivot = Offset(200f, 200f)) {
+                        drawRect(
+                            color = Color.Red,
+                            topLeft = Offset(100f, 100f),
+                            size = Size(300f, 200f)
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    // Clipping
+    if (true) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val circle = Path().apply {
+                addOval(Rect(center = Offset(animVal.value * 250f, animVal.value * 250f), radius = 250f))
+            }
+            drawPath(
+                path = circle,
+                color = Color.Black,
+                style = Stroke(width = 5.dp.toPx())
+            )
+            clipPath(
+                path = circle
+            ) {
+                drawRect(
+                    color = Color.Red,
+                    topLeft = Offset(400f, 400f),
+                    size = Size(400f, 400f)
+                )
+            }
         }
     }
 }
