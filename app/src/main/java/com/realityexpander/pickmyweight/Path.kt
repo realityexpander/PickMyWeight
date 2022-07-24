@@ -12,12 +12,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.drawscope.*
-import androidx.compose.ui.graphics.scale
 import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.unit.dp
 import kotlin.math.PI
 import kotlin.math.atan2
+import android.graphics.Paint as AndroidPaint
+import android.graphics.Path as AndroidPath
+import android.graphics.Color as AndroidColor
 
 @Composable
 fun PathCompose(
@@ -370,5 +373,90 @@ fun PathEffect(
             )
         }
     }
+}
+
+@Composable
+fun PathText(
+    modifier: Modifier = Modifier,
+) {
+    val infiniteTransition = rememberInfiniteTransition()
+    val phase by infiniteTransition.animateFloat(
+        initialValue = -1f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(900, easing = LinearEasing)
+        )
+    )
+
+
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val path = AndroidPath().apply {
+            moveTo(0f, 800f)
+            quadTo(
+                size.width / 2f, phase * 300f,
+                size.width, 800f
+            )
+        }
+
+        drawContext.canvas.nativeCanvas.apply {
+            drawTextOnPath(
+                "Hello World 2!",
+                path,
+                0f,
+                phase * -60f,
+                AndroidPaint().apply {
+                    color = AndroidColor.RED
+                    textSize = 130f
+                    textAlign = AndroidPaint.Align.CENTER
+                }
+            )
+        }
+
+        drawPath(
+            path = path.asComposePath(),
+            color = androidx.compose.ui.graphics.Color.Black,
+            style = Stroke(
+                width = 3.dp.toPx(),
+                cap = StrokeCap.Round,
+                pathEffect = PathEffect.dashPathEffect(
+                    intervals = floatArrayOf(50f, 30f)
+                )
+            )
+        )
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

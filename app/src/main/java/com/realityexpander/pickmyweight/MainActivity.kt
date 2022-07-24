@@ -55,8 +55,12 @@ class MainActivity : ComponentActivity() {
                         AnimateTransform()
                     }
 
-                    if (true) {
+                    if (false) {
                         PathEffect()
+                    }
+
+                    if(true) {
+                        PathText()
                     }
 
                     if(false) {
