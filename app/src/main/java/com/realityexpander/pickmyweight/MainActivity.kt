@@ -35,35 +35,44 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                 ) {
 
-                    ClockWidget(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(300.dp)
-                            .align(Alignment.TopCenter)
-                    )
-
-                    ScaleWidget(
-                        style = ScaleStyle(
-                            scaleWidth = 150.dp
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(300.dp)
-                            .align(Alignment.BottomCenter)
-                    ) { weightResult ->
-                        weight = weightResult
+                    if(false) {
+                        PathCompose()
                     }
 
-                    Text(
-                        text = "Weight: $weight",
-                        style = TextStyle(
-                            textAlign = TextAlign.Center,
-                            fontSize = 40.sp
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.Center)
-                    )
+                    if(true) {
+                        ClockWidget(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
+                                .align(Alignment.TopCenter)
+                        )
+                    }
+
+
+                    if(true) {
+                        ScaleWidget(
+                            style = ScaleStyle(
+                                scaleWidth = 150.dp
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(300.dp)
+                                .align(Alignment.BottomCenter)
+                        ) { weightResult ->
+                            weight = weightResult
+                        }
+
+                        Text(
+                            text = "Weight: $weight",
+                            style = TextStyle(
+                                textAlign = TextAlign.Center,
+                                fontSize = 40.sp
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.Center)
+                        )
+                    }
                 }
             }
         }
