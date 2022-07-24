@@ -236,7 +236,7 @@ fun AnimateTransform(
                     }
                 }
             }
-        }A
+        }
     }
 
     // Clipping
