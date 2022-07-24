@@ -236,7 +236,7 @@ fun AnimateTransform(
                     }
                 }
             }
-        }
+        }A
     }
 
     // Clipping
@@ -245,20 +245,23 @@ fun AnimateTransform(
             val circle = Path().apply {
                 addOval(Rect(center = Offset(animVal.value * 250f, animVal.value * 250f), radius = 250f))
             }
-            drawPath(
-                path = circle,
-                color = Color.Black,
-                style = Stroke(width = 5.dp.toPx())
-            )
+
             clipPath(
                 path = circle
             ) {
                 drawRect(
                     color = Color.Red,
                     topLeft = Offset(400f, 400f),
-                    size = Size(400f, 400f)
+                    size = Size(400f, 400f),
+                    style = Stroke(width = 15.dp.toPx())
                 )
             }
+
+            drawPath(
+                path = circle,
+                color = Color.Black,
+                style = Stroke(width = 15.dp.toPx())
+            )
         }
     }
 }
