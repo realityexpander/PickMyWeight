@@ -39,7 +39,15 @@ class MainActivity : ComponentActivity() {
                         PathCompose()
                     }
 
+                    if(false) {
+                        PathOps()
+                    }
+
                     if(true) {
+                        PathAnimate()
+                    }
+
+                    if(false) {
                         ClockWidget(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -77,6 +85,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 }
 
 @Composable
