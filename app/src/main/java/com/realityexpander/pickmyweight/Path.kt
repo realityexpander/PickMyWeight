@@ -281,12 +281,7 @@ fun PathEffect(
         )
     )
     Canvas(modifier = Modifier.fillMaxSize()) {
-        val path = Path().apply {
-            moveTo(100f, 100f)
-            cubicTo(100f, 300f, 600f, 700f, 600f, 1100f)
-            lineTo(800f, 800f)
-            lineTo(1000f, 1100f)
-        }
+
         val oval1 = Path().apply {
             addOval(
                 Rect(
@@ -300,14 +295,53 @@ fun PathEffect(
         val path2 = Path().apply {
             moveTo(-3000f, -2100f)
             cubicTo(
-                800f, -200f,
-                300f, 1200f,
+                800f, -400f,
+                -1200f, 1200f,
                 size.width + 3100f, 6000f)
         }
+
+        // Creates a bend in the last lineTo paths with the cornerPathEffect
+        val path3 = Path().apply {
+            moveTo(100f,100f)
+            cubicTo(100f, 300f, 600f, 700f, 600f, 1100f)
+            lineTo(800f, 800f)
+            lineTo(1000f, 1100f)
+        }
+        drawPath(
+            path = path3,
+            color = Color.Blue,
+            style = Stroke(
+                width = 5.dp.toPx(),
+                pathEffect = PathEffect.cornerPathEffect(
+                    radius = 1000f
+                )
+            )
+        )
 
         val star = PathParser()
             .parsePathString("M570.5,252.5l93.8,190c1.5,3.1 4.5,5.3 8,5.8l209.7,30.5c8.7,1.3 12.2,11.9 5.9,18.1L736.1,644.8c-2.5,2.4 -3.6,5.9 -3,9.4L768.8,863c1.5,8.7 -7.6,15.2 -15.4,11.2l-187.5,-98.6c-3.1,-1.6 -6.8,-1.6 -9.9,0l-187.5,98.6c-7.8,4.1 -16.9,-2.5 -15.4,-11.2L389,654.1c0.6,-3.4 -0.5,-6.9 -3,-9.4L234.2,496.9c-6.3,-6.1 -2.8,-16.8 5.9,-18.1l209.7,-30.5c3.4,-0.5 6.4,-2.7 8,-5.8l93.8,-190C555.4,244.7 566.6,244.7 570.5,252.5z")
             .toPath()
+
+        // ChainPathEffect
+        drawPath(
+            path = oval1,
+            color = Color.Green,
+            style = Stroke(
+                width = 5.dp.toPx(),
+                pathEffect = PathEffect.chainPathEffect(
+                    outer = PathEffect.stampedPathEffect(
+                        shape = path3,
+                        advance = 30f,
+                        phase = 0f,
+                        style = StampedPathEffectStyle.Rotate
+                    ),
+                    inner = PathEffect.dashPathEffect(
+                        intervals = floatArrayOf(200f, 200f),
+                        phase = -phase
+                    )
+                )
+            )
+        )
 
         drawPath(
             path = oval1,
@@ -315,7 +349,7 @@ fun PathEffect(
             style = Stroke(
                 width = 5.dp.toPx(),
                 pathEffect = PathEffect.dashPathEffect(
-                    intervals = floatArrayOf(50f, 30f),
+                    intervals = floatArrayOf(40f, 40f),
                     phase = phase
                 )
             )
