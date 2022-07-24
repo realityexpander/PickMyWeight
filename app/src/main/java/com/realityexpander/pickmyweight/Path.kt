@@ -141,15 +141,20 @@ fun PathAnimateArrowhead(
     val pos = FloatArray(2)
     val tan = FloatArray(2)
 
+    // Use the native path measure... (why isn't this in compose?)
     android.graphics.PathMeasure().apply {
+        // convert compose path to android path
         setPath(path.asAndroidPath(), false)
+
         getSegment(0f, pathPortion.value * length, outPath, true)
+
+        // Get position and tangent of the last point
         getPosTan(pathPortion.value * length, pos, tan)
     }
 
     Canvas(modifier = Modifier.fillMaxSize()) {
         drawPath(
-            path = outPath.asComposePath(),
+            path = outPath.asComposePath(),  // convert android path back to compose path
             color = Color.Blue,
             style = Stroke(width = 5.dp.toPx(), cap = StrokeCap.Round)
         )
@@ -163,9 +168,9 @@ fun PathAnimateArrowhead(
             // Draw arrowhead
             drawPath(
                 path = Path().apply {
-                    moveTo(x, y - 50f)
-                    lineTo(x - 40f, y + 60f)
-                    lineTo(x + 40f, y + 60f)
+                    moveTo(x, y - 40f)
+                    lineTo(x - 40f, y + 40f)
+                    lineTo(x + 40f, y + 40f)
                     close()
                 },
                 color = Color.Red
