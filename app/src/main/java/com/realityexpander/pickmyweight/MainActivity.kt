@@ -43,8 +43,12 @@ class MainActivity : ComponentActivity() {
                         PathOps()
                     }
 
-                    if(true) {
+                    if(false) {
                         PathAnimate()
+                    }
+
+                    if(true) {
+                        PathAnimateArrowhead()
                     }
 
                     if(false) {
