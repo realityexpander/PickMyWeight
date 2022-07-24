@@ -51,8 +51,12 @@ class MainActivity : ComponentActivity() {
                         PathAnimateArrowhead()
                     }
 
-                    if (true) {
+                    if (false) {
                         AnimateTransform()
+                    }
+
+                    if (true) {
+                        PathEffect()
                     }
 
                     if(false) {

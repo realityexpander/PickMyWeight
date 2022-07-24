@@ -1,11 +1,11 @@
 package com.realityexpander.pickmyweight
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -14,6 +14,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.*
 import androidx.compose.ui.graphics.scale
+import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.unit.dp
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -264,4 +265,76 @@ fun AnimateTransform(
             )
         }
     }
+}
+
+@Composable
+fun PathEffect(
+    modifier: Modifier = Modifier,
+) {
+
+    val infiniteTransition = rememberInfiniteTransition()
+    val phase by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 10000f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(60000, easing = LinearEasing)
+        )
+    )
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val path = Path().apply {
+            moveTo(100f, 100f)
+            cubicTo(100f, 300f, 600f, 700f, 600f, 1100f)
+            lineTo(800f, 800f)
+            lineTo(1000f, 1100f)
+        }
+        val oval1 = Path().apply {
+            addOval(
+                Rect(
+                    topLeft = Offset(
+                        300f, 200f
+                    ),
+                    bottomRight = Offset(800f, 500f)
+                )
+            )
+        }
+        val path2 = Path().apply {
+            moveTo(-3000f, -2100f)
+            cubicTo(
+                800f, -200f,
+                300f, 1200f,
+                size.width + 3100f, 6000f)
+        }
+
+        val star = PathParser()
+            .parsePathString("M570.5,252.5l93.8,190c1.5,3.1 4.5,5.3 8,5.8l209.7,30.5c8.7,1.3 12.2,11.9 5.9,18.1L736.1,644.8c-2.5,2.4 -3.6,5.9 -3,9.4L768.8,863c1.5,8.7 -7.6,15.2 -15.4,11.2l-187.5,-98.6c-3.1,-1.6 -6.8,-1.6 -9.9,0l-187.5,98.6c-7.8,4.1 -16.9,-2.5 -15.4,-11.2L389,654.1c0.6,-3.4 -0.5,-6.9 -3,-9.4L234.2,496.9c-6.3,-6.1 -2.8,-16.8 5.9,-18.1l209.7,-30.5c3.4,-0.5 6.4,-2.7 8,-5.8l93.8,-190C555.4,244.7 566.6,244.7 570.5,252.5z")
+            .toPath()
+
+        drawPath(
+            path = oval1,
+            color = Color.Red,
+            style = Stroke(
+                width = 5.dp.toPx(),
+                pathEffect = PathEffect.dashPathEffect(
+                    intervals = floatArrayOf(50f, 30f),
+                    phase = phase
+                )
+            )
+        )
+        scale(scale = 0.2f) {
+            drawPath(
+                path = path2,
+                color = Color.Red,
+                style = Stroke(
+                    width = 5.dp.toPx(),
+                    pathEffect = PathEffect.stampedPathEffect(
+                        shape = star,
+                        advance = 1000f,
+                        phase = -phase * 10f,
+                        style = StampedPathEffectStyle.Rotate
+                    )
+                )
+            )
+        }
+    }
+
 }
