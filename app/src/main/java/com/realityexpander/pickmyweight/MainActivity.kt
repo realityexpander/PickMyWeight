@@ -63,8 +63,12 @@ class MainActivity : ComponentActivity() {
                         PathText()
                     }
 
-                    if(true) {
+                    if(false) {
                         ImageModes()
+                    }
+
+                    if(true) {
+                        RevealInteractive()
                     }
 
                     if(false) {
