@@ -59,8 +59,12 @@ class MainActivity : ComponentActivity() {
                         PathEffect()
                     }
 
-                    if(true) {
+                    if(false) {
                         PathText()
+                    }
+
+                    if(true) {
+                        ImageModes()
                     }
 
                     if(false) {

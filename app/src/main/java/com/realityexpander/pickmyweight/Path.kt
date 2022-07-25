@@ -384,7 +384,9 @@ fun PathText(
         initialValue = -1f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(900, easing = LinearEasing)
+            repeatMode = RepeatMode.Reverse,
+            animation = tween(900,
+            easing = LinearOutSlowInEasing)
         )
     )
 
