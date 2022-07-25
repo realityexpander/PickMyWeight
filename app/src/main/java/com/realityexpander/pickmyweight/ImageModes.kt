@@ -84,7 +84,7 @@ fun RevealInteractive(
                 },
                 onDragEnd = {
                     //oldCirclePos = circlePos
-                }
+                },
             ) { change, dragAmount ->
                 circlePos = oldCirclePos + change.position
             }
